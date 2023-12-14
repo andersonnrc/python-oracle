@@ -1,3 +1,5 @@
+# Inclusão comentário branch feat-script-01
+
 import cx_Oracle
 import os
 import uuid
