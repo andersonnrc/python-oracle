@@ -1,3 +1,5 @@
+# Incluindo comentário em arquivo da branch main
+
 import cx_Oracle
 import os
 import uuid
