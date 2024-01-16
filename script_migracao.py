@@ -37,6 +37,8 @@ def main():
         sql = 'SELECT cod_arquivo, dthinclusao, arquivo FROM tb_arquivo'
         cur.execute(sql)
 
+	#contador para saber a quantidade de arquivos gravados no sistema de arquivos
+        cont = 0
         for s_cod, s_dthinclusao, s_arquivo in cur:
             s_data = s_dthinclusao.strftime('%Y/%m/%d')
 
@@ -48,8 +50,14 @@ def main():
             sqlUpdate = 'UPDATE tb_arquivo SET ds_path_arquivo = :1, ds_arquivo = :2 WHERE cod_arquivo = :3'
             cur.execute(sqlUpdate, (file[:-41], file[-40:], s_cod))
 
-        con.commit()
+	    cont+=1
+            print('Arquivos migrados: ',cont)
+
+	con.commit()
         cur.close()
+
+	print('----------------------------------------------')
+        print('Total de arquivos gravados no sistema de arquivos: ',cont)
 
     except cx_Oracle.DatabaseError as e:
         print('Erro: ', e)
